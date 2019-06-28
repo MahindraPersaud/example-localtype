@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>LocalType</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/starter-template.css" rel="stylesheet">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">LocalType</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<main role="main" class="container">
+    <div class="starter-template">
+        <h1>Welcome to LocalType!</h1>
+        <h6>A tool to geo-target ad copy and email to towns across the USA.</h6>
+    </div>
+    <form action="/output" method="GET">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="form-group">
+                    <label for="input_text"><h2>Ad text</h2></label><br>
+                    <textarea style="width:350px;height:200px;" id="input_text" name='input_text'
+                              placeholder="enter text here!">{{input_text}}</textarea>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="form-group">
+                    <label for="input_city"><h2>Choose a location</h2></label><br>
+                    {{dropdown_html|safe}}
+                    {% include 'usa.html' %}
+                </div>
+            </div>
+            <div class="col-lg-2 align-self-center">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg">Analyze!</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="row justify-content-around">
+        <div class="col-lg-6">
+            <h2>Overall Score: {{score|safe}}</h2>
+            <h3>Text Review</h3>
+            <div style="word-wrap:break-word; width:340px">
+                {{color_text|safe}}
+            </div>
+            <h3>Suggested Synonyms</h3>
+            <div style="word-wrap:break-word; width:340px">
+                <table class='table table-hover'>
+                    {{synonyms|safe}}
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <h2>Influential Words</h2>
+            {{top_words|safe}}
+        </div>
+        <div class="col-lg-3">
+            <h2>Top Matching Cities</h2>
+            {{top_cities|safe}}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+</main><!-- /.container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+</body>
+</html>
+
